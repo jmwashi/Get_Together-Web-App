@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+	<title>GetTogether</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <a id="brand" href="index"><span class="emphasize">GetTogether</span></a>
+        <div class="links">
+            <a class="link" href={{ url_for('index',filename='index.html') }}>Home</a>
+            <a class="link" href="/hello">Profile</a>
+            <a class="link" href="/create_meetup">Create Meetup</a>
+        </div>
+    </nav>
+	<h1>Eventbrite Result</h1>
+    <form action="" method="post" novalidate>
+        {% if result is defined %}
+            {% for entry in result %}
+            {% if entry.logo == "" %}
+            <p>No Logo For This Event</p>
+            {% else %}
+            <img src={{entry.logo}} height=25% width=25% alt="event image">
+            {% endif %}
+            <p><b>Name:</b> {{ entry.name }}</p>
+            <p><b>Description:</b> {{ entry.description }}</p>
+            <p><b>Start Time:</b> {{ entry.start_time}}</p>
+            <p><b>End Time:</b> {{ entry.end_time}}</p> 
+            <a href={{entry.url}}>Sign Up Here!</a>
+            <br>
+            <hr style="border-top: solid; 1px;" />
+            {% endfor %}
+        {% else %}
+            <p>No results are found!</p>
+        {% endif %}
+        <p id="show"></p>
+		{{form.hidden_tag()}}
+		{{form.selection}}
+		<p>{{ form.submit() }}</p>
+    </form>
+
+</body>
+</html>

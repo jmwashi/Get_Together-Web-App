@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+        <title>GetTogether</title>
+    </head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <a id="brand" href="index"><span class="emphasize">GetTogether</span></a>
+        <div class="links">
+            <a class="link" href={{ url_for('index',filename='index.html') }}>Home</a>
+            <a class="link" href="/hello">Profile</a>
+            <a class="link" href="/create_meetup">Create Meetup</a>
+        </div>
+    </nav>
+<form action="" method="post" novalidate>
+		<h1>Results:</h1>
+		{% for entry in result %}
+		<img src={{entry.Picture}} height="150" width="150">
+		<p><b>Name:</b> {{ entry.Name }}</p>
+		<p><b>Location:</b> {{ entry.Location }}</p>
+		<p><b>Rating:</b> {{ entry.Rating }}</p> <br/>
+		<hr style="border-top: solid; 1px;" />
+		{% endfor %}
+		<p id="show"></p>
+		{{form.hidden_tag()}}
+		{{form.selection}}
+		<p>{{ form.submit() }}</p>
+</form>
+</body>
+</html>
